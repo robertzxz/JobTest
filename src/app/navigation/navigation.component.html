@@ -1,0 +1,19 @@
+<header>
+    <h1 [routerLink]="['/home']">World News</h1>
+    <nav>
+        <ul class="nav-links">
+            <li class="nav-link" routerLinkActive="activeRoute"><a [routerLink]="['/home']" (click)="closeNav()">Latest News</a></li>
+            <li class="nav-link" routerLinkActive="activeRoute"><a [routerLink]="['/technology']" (click)="closeNav()">Technology</a></li>
+            <li class="nav-link" routerLinkActive="activeRoute"><a [routerLink]="['/sports']" (click)="closeNav()">Sports</a></li>
+            <li class="nav-link" routerLinkActive="activeRoute"><a [routerLink]="['/search']" (click)="closeNav()">Search <fa-icon [icon]="faSearch"></fa-icon>
+            </a></li>
+        </ul>
+        <div class="burger" (click)="navToggle()">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+</header>
+
+

@@ -1,0 +1,46 @@
+<div class="wrapper">
+    <div class="search">
+        <input [(ngModel)]="searchInput"  type="text" placeholder="Search here..." name="searchInput">
+        <div class="filters">
+            <h3>Sort by:</h3>
+            <select #sortSelect class="sortSelect" (change)="sortArticles(sortSelect.value)">
+                <option value="published_desc">Desc</option>
+                <option value="published_asc">Asc</option>
+            </select>
+            <h3>Language:</h3>
+            <select #lanSelect class="lanSelect" (change)="changeLan(lanSelect.value)">
+                <option class="all" value="all">All</option>
+                <option class="english" value="en">English</option>
+            </select>
+            <h3>Categories:</h3>
+            <select #catSelect class="catSelect" (change)="changeCat(catSelect.value)">
+                <option class="all" value="all">All</option>
+                <option class="technology" value="technology">Technology</option>
+                <option class="sports" value="sports">Sports</option>
+            </select>
+        </div>
+        <button class="searchButton" (click)="getResults()">Search</button>
+    </div>
+    <section class="articles">
+        <article class="singleArticle" #singleArticle *ngFor="let item of articleList; let i=index" id="{{i}}">
+            <div class="divider">
+                <h5 class="category">{{item.category.toUpperCase()}}</h5>
+                <h5 class="date">{{item.published_at}}</h5>
+            </div>
+            <img *ngIf="item.image" src={{item.image}} alt="">
+            <div class="info">
+                <a (click)="openLink(item.url)">
+                    <h2 class="title" [ngClass]="{'textBoost' : !item.image}">{{item.title}}</h2>
+                </a>
+                <div class="desc">
+                    <p class="description" id="desc{{i}}">{{item.description}}</p>
+                    <p class="readMore" id="readMore{{i}}" [ngClass]="{'readMoreActive': checkForReadMore(i)}" (click)="readMoreToggle(i)">Read More...</p>
+                </div>
+                <p *ngIf="item.author" class="author">Written by {{item.author}}</p>
+            </div>
+       </article>
+    </section>
+    <div class="message" *ngIf="articleList.length === totalNumArticles">
+        <h1>No more articles on this topic.</h1>
+    </div>
+</div>
